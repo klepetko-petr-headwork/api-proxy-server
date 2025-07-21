@@ -4,10 +4,10 @@ const express = require('express');
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
-const jsonAuth = 'Basic a2xlcGV0a286MjNiNjZCQUIyeTBC';
-const xmlAuth = 'Basic a2xlcGV0a286MjNiNjZCQUIyeTBC';
+const jsonAuth = process.env.JSON_AUTH;
+const xmlAuth = process.env.XML_AUTH;
 
 app.use(express.static('.')); // serve index.html
 

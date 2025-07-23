@@ -1,4 +1,5 @@
 // server.js
+require('dotenv').config();
 const express = require('express');
 // const fetch = require('node-fetch');
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
@@ -9,16 +10,20 @@ const PORT = process.env.PORT || 3000;
 const jsonAuth = process.env.JSON_AUTH;
 const xmlAuth = process.env.XML_AUTH;
 
+// console.log(`xml: ${xmlAuth}`);
+
 app.use(express.static('.')); // serve index.html
 
 app.get('/proxy/json/:id', async (req, res) => {
     const id = req.params.id;
-    console.log(`fetching json: ${id}`)
-    const response = await fetch(`https://rdo.renomia.cz/api/2.0/sml_nacist_smlouvy_5289/${id}`, {
-        headers: { Authorization: jsonAuth }
-    });
-    const data = await response.json();
-    res.json(data);
+    if (id) {
+        // console.log(`fetching json: ${id}`)
+        const response = await fetch(`https://rdo.renomia.cz/api/2.0/sml_nacist_smlouvy_5289/${id}`, {
+            headers: { Authorization: jsonAuth }
+        });
+        const data = await response.json();
+        res.json(data);
+    }
 });
 
 app.get('/proxy/xml1/:id', async (req, res) => {

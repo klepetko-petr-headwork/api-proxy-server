@@ -88,7 +88,7 @@ app.get('/proxy/xml2/:id', async (req, res) => {
 });
 
 app.get('/test/env', async (req, res) => {
-        res.send(process.env.JSON_AUTH);
+        res.send(process.env.TEST_VARIABLE);
 });
 
 app.listen(PORT, () => console.log(`Server běží na http://localhost:${PORT}`)); 

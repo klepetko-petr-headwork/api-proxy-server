@@ -1,10 +1,13 @@
 // server.js
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors'); // <-- přidáno
 // const fetch = require('node-fetch');
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
 const app = express();
+app.use(cors()); // <-- povolí všechny domény
+
 const PORT = process.env.PORT || 3000;
 
 const jsonAuth = process.env.JSON_AUTH;
